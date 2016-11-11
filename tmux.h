@@ -77,6 +77,15 @@ struct tmuxproc;
 #define READ_EMPTY_SIZE 16
 
 #define READ_CHANGE_HITS 3
+/*=======
+ * READ_SIZE is the maximum size of data to hold from a pty (the event high
+ * watermark). READ_BACKOFF is the amount of data waiting to be output to a tty
+ * before pty reads will be backed off. READ_TIME is how long to back off
+ * before the next read (in microseconds) if a tty is above READ_BACKOFF.
+ */
+#define READ_SIZE 1024
+#define READ_BACKOFF 512
+#define READ_TIME 100
 
 /* Attribute to make gcc check printf-like arguments. */
 #define printflike(a, b) __attribute__ ((format (printf, a, b)))
@@ -818,6 +827,7 @@ struct window_pane {
 
 	int		 fd;
 	struct bufferevent *event;
+	struct event	 timer;
 
 	struct event	 resize_timer;
 

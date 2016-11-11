@@ -38,7 +38,7 @@ static void	tty_init_termios(int, struct termios *, struct bufferevent *);
 static void	tty_read_callback(struct bufferevent *, void *);
 static void	tty_error_callback(struct bufferevent *, short, void *);
 
-static int	tty_client_ready(struct client *, struct window_pane *);
+int	tty_client_ready(struct client *, struct window_pane *);
 
 static void	tty_set_italics(struct tty *);
 static int	tty_try_colour(struct tty *, int, const char *);
@@ -720,7 +720,7 @@ tty_draw_line(struct tty *tty, const struct window_pane *wp,
 	tty_update_mode(tty, tty->mode, s);
 }
 
-static int
+int
 tty_client_ready(struct client *c, struct window_pane *wp)
 {
 	if (c->session == NULL || c->tty.term == NULL)
