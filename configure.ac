@@ -1,6 +1,6 @@
 # configure.ac
 
-AC_INIT(tmux, 2.3)
+AC_INIT(tmux, 2.3_backofftimer)
 
 AC_CONFIG_AUX_DIR(etc)
 AM_INIT_AUTOMAKE([foreign subdir-objects])
